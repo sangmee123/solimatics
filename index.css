@@ -22,6 +22,8 @@ a:hover {
 #map { margin: 50px; }
 
 /*graph1 css*/
+#container { float: left; }
+
 #datatable {
     font-family: Verdana, sans-serif;
     border-collapse: collapse;
@@ -31,29 +33,24 @@ a:hover {
     width: 100%;
     max-width: 500px;
 }
-
 #datatable caption {
     padding: 1em 0;
     font-size: 1.2em;
     color: #555;
 }
-
 #datatable th {
     font-weight: 600;
     padding: 0.5em;
 }
-
 #datatable td,
 #datatable th,
 #datatable caption {
     padding: 0.5em;
 }
-
 #datatable thead tr,
 #datatable tr:nth-child(even) {
     background: #f8f8f8;
 }
-
 #datatable tr:hover {
     background: #f1f7ff;
 }
