@@ -15,5 +15,7 @@ a:hover {
 .topList {
     float: left;
     font-size: 30px;
-    margin: 50px 15%;
+    margin: 40px 15%;
 }
+
+#map { margin: 50px; }
