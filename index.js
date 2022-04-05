@@ -44,3 +44,43 @@ Highcharts.chart('container', {
       }
     }
 });
+
+
+/*Graph2*/
+var root = am5.Root.new("chartdiv1");
+
+root.setThemes([
+  am5themes_Animated.new(root)
+]);
+
+var chart = root.container.children.push(am5percent.PieChart.new(root, {
+  layout: root.verticalLayout,
+  innerRadius: am5.percent(50)
+}));
+
+var series = chart.series.push(am5percent.PieSeries.new(root, {
+  valueField: "value",
+  categoryField: "category",
+  alignLabels: false
+}));
+
+series.labels.template.setAll({
+  textType: "circular",
+  centerX: 0,
+  centerY: 0
+});
+
+series.data.setAll([
+  { value: 55, category: "탄수화물" },
+  { value: 25, category: "지방" },
+  { value: 20, category: "단백질" }
+]);
+
+var legend = chart.children.push(am5.Legend.new(root, {
+  centerX: am5.percent(50),
+  x: am5.percent(50),
+  marginTop: 15,
+  marginBottom: 15,
+}));
+
+legend.data.setAll(series.dataItems);
