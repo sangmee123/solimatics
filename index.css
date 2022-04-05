@@ -21,7 +21,7 @@ a:hover {
 /*map library css*/
 #map { margin: 50px; }
 
-#second { margin-left: 50px; }
+.second { margin-left: 50px; }
 
 /*graph1 css*/
 #container { float: left; }
