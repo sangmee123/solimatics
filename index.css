@@ -19,7 +19,7 @@ a:hover {
 }
 
 /*map css*/
-html, body {
+#btnRoadmap, #btnSkyview {
     width: 600px;
     height: 400px;
     margin: 0;
@@ -99,7 +99,3 @@ html, body {
     padding: 12px 0;
     border: none;
 } .custom_zoomcontrol span:first-child{border-bottom:1px solid #bfbfbf;}        
-
-#btnRoadmap {
-
-}    
