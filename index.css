@@ -22,13 +22,6 @@ a:hover {
 #map { margin: 50px; }
 
 /*graph1 css*/
-.highcharts-figure,
-.highcharts-data-table table {
-    min-width: 310px;
-    max-width: 800px;
-    margin: 1em auto;
-}
-  
 #datatable {
     font-family: Verdana, sans-serif;
     border-collapse: collapse;
