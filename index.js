@@ -1,3 +1,5 @@
+/*Map Library*/
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -16,3 +18,29 @@ var marker = new kakao.maps.Marker({
 
 // 마커가 지도 위에 표시되도록 설정합니다
 marker.setMap(map);
+
+/*Graph1*/
+Highcharts.chart('container', {
+    data: {
+      table: 'datatable'
+    },
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: '2021년 2분기 글로벌 스마트폰 시장 점유율'
+    },
+    subtitle: {
+        text: '[단위: 억원]'
+    },
+    yAxis: {
+        max: 100,
+        allowDecimals: false,
+    },
+    tooltip: {
+      formatter: function () {
+        return '<b>' + this.series.name + '</b><br/>' +
+          this.point.y + ' ' + this.point.name.toLowerCase();
+      }
+    }
+});
