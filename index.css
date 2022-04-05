@@ -1,0 +1,19 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: rgb(119, 117, 117);
+}
+
+.h1 {
+    padding-left: 20px;
+    margin: 10px 10px 10px 10px;
+}
+
+.topList {
+    display: inline-block;
+    margin: 50px 50px;
+    font-size: large;
+}
