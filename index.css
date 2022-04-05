@@ -17,3 +17,7 @@ a:hover {
     margin: 50px 50px;
     font-size: large;
 }
+
+.map {
+    display: inline-block;
+}
