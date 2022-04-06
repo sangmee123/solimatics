@@ -32,12 +32,10 @@ html, body {width:100%;height:500px;margin:0;padding:0;}
     padding: 0px 10px 0px 7px;
 }
 
-.topList ul{
+.topList {
+    display: inline-block;
     font-size: 30px;
-    margin-left: 50%;
 }
-
-.first { margin-left: 50px; }
 
 /*Graph1 Css*/
 #container { float: left; }
