@@ -8,15 +8,15 @@ a {
 }
 
 .content {
-    margin-left: 10%;
+    margin-left: 5%;
 }
 
 #menu {
+    display: inline-block;
     width: 500px;
     height: 50%;
     border-right: 1px solid #ddd;
-    background-color: rgb(172, 177, 196);
-    position: fixed; 
+    background-color: rgb(172, 177, 196); 
     text-align: center;
     color: white;
 }
@@ -62,14 +62,110 @@ h1 {
 /*Map Api Css*/
 #map { 
     display: inline-block;
-    margin-left: 530px; 
-    margin-top: 80px;
-}
-
-#mapLayer { 
-    display: inline;
-    margin-left: 530px; 
+    margin-left: 80px; 
 }
 
 .olControlAttribution{ right:20px; }
 .olControlLayerSwitcher{ right:20px; top:20px; }
+
+/*Graph1*/
+.highcharts-figure1,
+.highcharts-data-table table {
+    display: block;
+    float: left;
+    min-width: 400px;
+    max-height: 500px;
+    margin: 1em auto;
+    margin-top: 100px;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+
+/*Graph2*/
+#chartdiv1 {
+    display: inline;
+    margin-top: 50px;
+    float: left;
+    width: 400px;
+    height: 500px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/*Graph3*/
+.highcharts-figure2,
+.highcharts-data-table table {
+    max-width: 400px;
+    margin-top: 100px;
+    float: left;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}

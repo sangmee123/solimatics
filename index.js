@@ -2,8 +2,16 @@
 let btn = document.querySelector('#loaction_btn');
 let hide = document.querySelector('.hide');
 //숨겨진 기업 리스트 보이기
+let i = 0;
 btn.addEventListener('click', function() {
+  i++;
   document.querySelector('.hide').classList.remove('hide');
+  if(i < 7) 
+    btn.innerHTML = '장소 더보기';
+  else if(i == 7) 
+    btn.innerHTML = '접기';
+  else if(i == 8)
+    document.querySelector('.li2').style.display = "none";
 })
 
 /*Map API*/
@@ -84,7 +92,7 @@ map.addControl(new OpenLayers.Control.Attribution({separator:" "}))
 }
 
 /*Graph1*/
-Highcharts.chart('container', {
+Highcharts.chart('container1', {
     data: {
       table: 'datatable'
     },
@@ -108,7 +116,6 @@ Highcharts.chart('container', {
       }
     }
 });
-
 
 /*Graph2*/
 var root = am5.Root.new("chartdiv1");
