@@ -1,31 +1,86 @@
+/*장소 더보기 버튼 누를 시*/
+let btn = document.querySelector('#loaction_btn');
+let hide = document.querySelector('.hide');
+//숨겨진 기업 리스트 보이기
+btn.addEventListener('click', function() {
+  document.querySelector('.hide').classList.remove('hide');
+})
+
 /*Map API*/
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
+var map;
+var mapBounds = new OpenLayers.Bounds(123 , 32, 134 , 43);
+var mapMinZoom = 7;
+var mapMaxZoom = 19;
 
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+// avoid pink tiles
+OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+OpenLayers.Util.onImageLoadErrorColor = "transparent";
+ 
+function init(){
+var options = {
+    controls: [],
+    projection: new OpenLayers.Projection("EPSG:900913"),
+    displayProjection: new OpenLayers.Projection("EPSG:4326"),
+    units: "m",
+    controls : [],
+    numZoomLevels:21,
+    maxResolution: 156543.0339,
+    maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34)
+};
+map = new OpenLayers.Map('map', options);
+ 
+var options = {
+    serviceVersion : "",
+    layername: "",
+    isBaseLayer: false,
+    opacity : 1,
+    type: 'png',
+    transitionEffect: 'resize',
+    tileSize: new OpenLayers.Size(256,256),
+    min_level : 7,
+    max_level : 18,
+    buffer:0
+};
+//======================================
+//1. 배경지도 추가하기
+vBase = new vworld.Layers.Base('VBASE');
+if (vBase != null){map.addLayer(vBase);}
+//2. 영상지도 추가하기
+vSAT = new vworld.Layers.Satellite('VSAT');
+if (vSAT != null) {map.addLayer(vSAT);};
+//3. 하이브리드지도 추가하기
+vHybrid = new vworld.Layers.Hybrid('VHYBRID');
+if (vHybrid != null) {map.addLayer(vHybrid);} 
+//4. Gray지도 추가하기
+vGray = new vworld.Layers.Gray('VGRAY');
+if (vGray != null){map.addLayer(vGray);}
+//5. Midnight지도 추가하기
+vMidnight = new vworld.Layers.Midnight('VMIDNIGHT');
+if (vMidnight != null){map.addLayer(vMidnight);}
+//===========================================
 
-// 마커가 표시될 위치입니다 
-var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+var switcherControl = new OpenLayers.Control.LayerSwitcher();
+map.addControl(switcherControl);
+switcherControl.maximizeControl();
 
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition
-});
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-
-// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-function zoomIn() {
-  map.setLevel(map.getLevel() - 1);
+map.zoomToExtent( mapBounds.transform(map.displayProjection, map.projection ) );
+map.zoomTo(11);
+     
+map.addControl(new OpenLayers.Control.PanZoomBar());
+//map.addControl(new OpenLayers.Control.MousePosition());
+map.addControl(new OpenLayers.Control.Navigation());
+//map.addControl(new OpenLayers.Control.MouseDefaults()); //2.12 No Support
+map.addControl(new OpenLayers.Control.Attribution({separator:" "}))
 }
-
-// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-function zoomOut() {
-  map.setLevel(map.getLevel() + 1);
+  function deleteLayerByName(name){
+  for (var i=0, len=map.layers.length; i<len; i++) {
+      var layer = map.layers[i];
+      if (layer.name == name) {
+          map.removeLayer(layer);
+          //return layer;
+          break;
+      }
+  }
 }
 
 /*Graph1*/
