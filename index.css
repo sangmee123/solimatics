@@ -8,17 +8,16 @@ a {
 }
 
 .content {
-    margin-left: 5%;
+    margin-left: 15%;
+    display: inline-block;
 }
 
 #menu {
     display: inline-block;
     width: 500px;
     height: 50%;
-    border-right: 1px solid #ddd;
-    background-color: rgb(172, 177, 196); 
     text-align: center;
-    color: white;
+    color: black;
 }
 #menu li a {
     display: block;
@@ -26,7 +25,7 @@ a {
     line-height: 30px;
     color: inherit
 }
-#menu li:hover { background-color: rgb(99, 151, 149); }
+#menu li:hover { background-color: rgb(203, 238, 237); }
 
 li { 
     list-style: none;
@@ -34,10 +33,8 @@ li {
 }
 .li2 {
     width: 500px;
-    border-right: 1px solid #ddd;
-    background-color: rgb(172, 177, 196);
     text-align: center;
-    color: white;
+    color: black;
 }
 
 h1 {
@@ -62,6 +59,7 @@ h1 {
 /*Map Api Css*/
 #map { 
     display: inline-block;
+    position: fixed;
     margin-left: 80px; 
 }
 
@@ -114,7 +112,6 @@ h1 {
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
-
 
 /*Graph2*/
 #chartdiv1 {

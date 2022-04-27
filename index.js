@@ -9,10 +9,14 @@ btn.addEventListener('click', function() {
   if(i < 7) 
     btn.innerHTML = '장소 더보기';
   else if(i == 7) 
-    btn.innerHTML = '접기';
-  else if(i == 8)
-    document.querySelector('.li2').style.display = "none";
+    btn.innerHTML = '접기';  
 })
+
+if (btn.innerHTML === '접기') {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.li2').classList.add('hide');
+  })
+}
 
 /*Map API*/
 var map;
@@ -89,6 +93,76 @@ map.addControl(new OpenLayers.Control.Attribution({separator:" "}))
           break;
       }
   }
+}
+
+var apiMap;//2D map
+var SOPPlugin;//3D map
+vworld.showMode = false;//브이월드 배경지도 설정 컨트롤 유무(true:배경지도를 컨트롤 할수 있는 버튼 생성/false:버튼 해제)
+var mControl;//마커이벤트변수
+var tempMarker = null;//임시마커
+ 
+/**
+ * - rootDiv, mapType, mapFunc, 3D initCall, 3D failCall
+ * - 브이월드 5가지 파라미터를 셋팅하여 지도 호출
+ */
+vworld.init("vMap", "map-first", 
+    function() {        
+        apiMap = this.vmap;//브이월드맵 apiMap에 셋팅 
+        apiMap.setBaseLayer(apiMap.vworldBaseMap);//기본맵 설정 
+        apiMap.setControlsType({"simpleMap":true}); //간단한 화면
+        apiMap.addVWORLDControl("zoomBar");//panzoombar등록
+        apiMap.setCenterAndZoom(14243425.793355, 4342305.8698004, 7);//화면중심점과 레벨로 이동 (초기 화면중심점과 레벨)     
+    },
+    function (obj){//3D initCall(성공)
+        SOPPlugin = obj;
+    },
+    function (msg){//3D failCall(실패)
+        alert(msg);
+    }
+);
+ 
+/**
+ * 마커 찍기
+ */
+function addMarkingEvent(){ 
+    var pointOptions = {persist:true};//포인트옵션
+    if (mControl == null) {//마커컨트롤이 정의 되어 있지 않으면
+        mControl = 
+            new OpenLayers.Control.Measure(
+                    OpenLayers.Handler.Point,
+                    {handlerOptions:pointOptions});//포인트 객체 생성
+        mControl.events.on({"measure":mClick});//객체를 클릭이벤트 등록
+        apiMap.addControl(mControl);//나의 map에 객체 추가
+    }        
+    apiMap.init();//나의 맵 초기화
+    mControl.activate();//마커컨트롤 활성화
+}
+ 
+/**
+ * 말풍선이벤트
+ */
+function mClick(event){
+    apiMap.init();//나의 맵 초기화    
+    var temp = event.geometry;//마커 클릭이벤트시 나오는 좌표    
+    var pos = new OpenLayers.LonLat(temp.x, temp.y);//좌표값 셋팅
+     
+    addMarker(pos.lon, pos.lat,"마커클릭시나오는말풀선.", null);//말풍선  
+}
+ 
+/**
+ * 말풍선결과
+ */
+function addMarker(lon, lat, message, imgurl){
+    var marker = new vworld.Marker(lon, lat,message,"");
+     
+    // 마커 아이콘 이미지 파일명 설정합니다.
+    if (typeof imgurl == 'string') {marker.setIconImage(imgurl);}
+     
+    // 마커의 z-Index 설정
+    marker.setZindex(3);
+     
+    apiMap.addMarker(marker);
+    tempMarker = marker; 
 }
 
 /*Graph1*/
