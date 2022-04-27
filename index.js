@@ -1,22 +1,21 @@
 /*장소 더보기 버튼 누를 시*/
-let btn = document.querySelector('#loaction_btn');
-let hide = document.querySelector('.hide');
-//숨겨진 기업 리스트 보이기
-let i = 0;
-btn.addEventListener('click', function() {
-  i++;
-  document.querySelector('.hide').classList.remove('hide');
-  if(i < 7) 
-    btn.innerHTML = '장소 더보기';
-  else if(i == 7) 
-    btn.innerHTML = '접기';  
-})
+let btnL = document.querySelector('#btnL');
+let btnR = document.querySelector('#btnR');
 
-if (btn.innerHTML === '접기') {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.li2').classList.add('hide');
-  })
-}
+let first_li = document.querySelector('.first');
+let second_li = document.querySelector('.second');
+let hide = document.querySelector('.hide');
+
+//기업 리스트 페이지 넘기기
+btnL.addEventListener('click', function() {
+    second_li.classList.add('hide');
+    first_li.classList.remove('hide');
+    
+})
+btnR.addEventListener('click', function() {
+    first_li.classList.add('hide');
+    second_li.classList.remove('hide');
+})
 
 /*Map API*/
 var map;

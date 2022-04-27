@@ -31,11 +31,6 @@ li {
     list-style: none;
     padding: 15px;
 }
-.li2 {
-    width: 500px;
-    text-align: center;
-    color: black;
-}
 
 h1 {
     font-size: 25px;
@@ -45,16 +40,8 @@ h1 {
 
 .hide { display: none; }
 
-#loaction_btn {
-    color: rgb(58, 58, 255);
-    border: 1px solid gainsboro;
-    background-color: white;
-    border-radius: 20px;
-    padding: 10px 70px 10px 70px;
-}
-#loaction_btn:hover {
-    background-color: rgb(238, 238, 238);
-}
+#btnL { margin-right: 10px; }
+#btnR { margin-left: 10px; }
 
 /*Map Api Css*/
 #map { 
