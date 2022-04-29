@@ -75,6 +75,8 @@ h1 {
 /*Graph1, 2, 3 Css*/
 .highcharts-figure1, .highcharts-figure2, .highcharts-figure3,
 .highcharts-data-table table {
+    border: 1px solid dimgray;
+    padding: 20px;
     float: left;
     min-width: 450px;
     max-width: 500px;
