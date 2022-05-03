@@ -83,7 +83,7 @@ for(let i = 0; i < positions.length; i++) {
 marker.setMap(map);
 
  // 아래 코드는 지도 위의 마커를 제거하는 코드입니다 
-marker.setMap(null);
+//marker.setMap(null);
 
 let li1 = document.querySelector('.li1');
 li1.addEventListener('click', function() {
