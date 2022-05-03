@@ -8,15 +8,14 @@ let hide = document.querySelector('.hide');
 
 //기업 리스트 페이지 넘기기
 btnL.addEventListener('click', function() {
-    second_li.classList.add('hide');
-    first_li.classList.remove('hide');
-    
-})
-btnR.addEventListener('click', function() {
-    first_li.classList.add('hide');
-    second_li.classList.remove('hide');
+  second_li.classList.add('hide');
+  first_li.classList.remove('hide');
 })
 
+btnR.addEventListener('click', function() {
+    first_li.classList.add('hide'); //첫번째 리스트 숨기기
+    second_li.classList.remove('hide'); //두번째 리스트 보이기
+})
 
 /*Map API*/
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -30,25 +29,61 @@ var map = new kakao.maps.Map(container, options);
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(37.868975, 127.738287), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 11 // 지도의 확대 레벨
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 // 마커가 표시될 위치입니다 
-var markerPosition  = new kakao.maps.LatLng(37.868975, 127.738287); 
+var positions = [
+  {
+    title: '솔리메틱스',
+    latLng: new kakao.maps.LatLng(37.868999, 127.738249)
+  },
+  {
+    title: '서울건설기계(주)',
+    latLng: new kakao.maps.LatLng(37.673613, 126.865862)
+  },
+  {
+    title: '우리건설기계',
+    latLng: new kakao.maps.LatLng(37.568702, 126.993562)
+  },
+  {
+    title: '봉래건설기계(주)',
+    latLng: new kakao.maps.LatLng(37.375656, 126.944399)
+  },
+  {
+    title: '태산건설기계',
+    latLng: new kakao.maps.LatLng(37.597822, 126.650762)
+  },
+  {
+    title: '(주)비젼시스템',
+    latLng: new kakao.maps.LatLng(37.513896, 127.115957)
+  },
+  {
+    title: '정우건설중기',
+    latLng: new kakao.maps.LatLng(37.601084, 127.099927)
+  },
+  {
+    title: '(주)에스지오',
+    latLng: new kakao.maps.LatLng(37.402056, 126.686377)
+  }
+];
 
 // 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition
-});
+for(let i = 0; i < positions.length; i++) {
+  var marker = new kakao.maps.Marker({
+      map: map,
+      position: positions[i].latLng,
+      title: positions[i].title
+  });
+}
 
 // 마커가 지도 위에 표시되도록 설정합니다
 marker.setMap(map);
 
-// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-// marker.setMap(null); 
-
+ // 아래 코드는 지도 위의 마커를 제거하는 코드입니다 
+marker.setMap(null);
 
 let li1 = document.querySelector('.li1');
 li1.addEventListener('click', function() {
