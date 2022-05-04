@@ -9,18 +9,32 @@ let hide = document.querySelector('.hide');
 //기업 리스트 페이지 넘기기
 btnL.addEventListener('click', function() {
   second_li.classList.add('hide');
-  first_li.classList.remove('hide');
+  first_li.classList.remove('hide');  
+  // 아래 코드는 지도 위의 마커를 제거하는 코드입니다 
+  markers.setMap(null);
 })
 
 btnR.addEventListener('click', function() {
-    first_li.classList.add('hide'); //첫번째 리스트 숨기기
-    second_li.classList.remove('hide'); //두번째 리스트 보이기
+  first_li.classList.add('hide'); //첫번째 리스트 숨기기
+  second_li.classList.remove('hide'); //두번째 리스트 보이기
+
+  // 아래 코드는 지도 위의 마커를 제거하는 코드입니다 
+  marker.setMap(null);
+
+  // 마커를 생성합니다
+  for(let i = 0; i < positions2.length; i++) {
+    var markers = new kakao.maps.Marker({
+        map: map,
+        position: positions2[i].latLng,
+        title: positions2[i].title
+    });
+  }
 })
 
 /*Map API*/
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: new kakao.maps.LatLng(37.868975, 127.738287), //지도의 중심좌표.
+	center: new kakao.maps.LatLng(36.794491, 127.923661), //지도의 중심좌표.
 	level: 3 //지도의 레벨(확대, 축소 정도)
 };
 
@@ -28,18 +42,14 @@ var map = new kakao.maps.Map(container, options);
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-        center: new kakao.maps.LatLng(37.868975, 127.738287), // 지도의 중심좌표
-        level: 11 // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(36.794491, 127.923661), // 지도의 중심좌표
+        level: 12 // 지도의 확대 레벨
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 // 마커가 표시될 위치입니다 
 var positions = [
-  {
-    title: '솔리메틱스',
-    latLng: new kakao.maps.LatLng(37.868999, 127.738249)
-  },
   {
     title: '서울건설기계(주)',
     latLng: new kakao.maps.LatLng(37.673613, 126.865862)
@@ -78,6 +88,37 @@ for(let i = 0; i < positions.length; i++) {
       title: positions[i].title
   });
 }
+
+var positions2 = [
+  {
+    title: '대웅건설(주)',
+    latLng: new kakao.maps.LatLng(37.035640, 127.604745)
+  },
+  {
+    title: '영주대형건설기계',
+    latLng: new kakao.maps.LatLng(36.816873, 128.638362)
+  },
+  {
+    title: '영암건설장비(주)',
+    latLng: new kakao.maps.LatLng(37.179881, 128.976808)
+  },
+  {
+    title: '송광건설기계',
+    latLng: new kakao.maps.LatLng(37.168421, 126.895548)
+  },
+  {
+    title: '금성건설기계',
+    latLng: new kakao.maps.LatLng(36.890148, 127.481973)
+  },
+  {
+    title: '한내건설(주)',
+    latLng: new kakao.maps.LatLng(36.941485, 127.688740)
+  },
+  {
+    title: '솔리메틱스',
+    latLng: new kakao.maps.LatLng(37.868999, 127.738249)
+  }
+];
 
 // 마커가 지도 위에 표시되도록 설정합니다
 marker.setMap(map);
