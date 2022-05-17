@@ -1,52 +1,20 @@
-/*장소 더보기 버튼 누를 시*/
-let btnL = document.querySelector('#btnL');
-let btnR = document.querySelector('#btnR');
+/*navBar 날짜 표시*/
+var today = new Date();
+var year = today.getFullYear();
+var month = ('0' + (today.getMonth() + 1)).slice(-2);
+var day = ('0' + today.getDate()).slice(-2);
 
-let first_li = document.querySelector('.first');
-let second_li = document.querySelector('.second');
-let hide = document.querySelector('.hide');
-
-//기업 리스트 페이지 넘기기
-btnL.addEventListener('click', function() {
-  second_li.classList.add('hide');
-  first_li.classList.remove('hide');  
-  // 아래 코드는 지도 위의 마커를 제거하는 코드입니다 
-  markers.setMap(null);
-})
-
-btnR.addEventListener('click', function() {
-  first_li.classList.add('hide'); //첫번째 리스트 숨기기
-  second_li.classList.remove('hide'); //두번째 리스트 보이기
-
-  // 아래 코드는 지도 위의 마커를 제거하는 코드입니다 
-  marker.setMap(null);
-
-  // 마커를 생성합니다
-  for(let i = 0; i < positions2.length; i++) {
-    var markers = new kakao.maps.Marker({
-        map: map,
-        position: positions2[i].latLng,
-        title: positions2[i].title
-    });
-  }
-})
+var dateString = year + '. ' + month + '. ' + day + '.';
+document.querySelector('.date').innerHTML = dateString;
 
 /*Map API*/
-var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: new kakao.maps.LatLng(36.794491, 127.923661), //지도의 중심좌표.
-	level: 3 //지도의 레벨(확대, 축소 정도)
-};
-
-var map = new kakao.maps.Map(container, options);
-
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-        center: new kakao.maps.LatLng(36.794491, 127.923661), // 지도의 중심좌표
-        level: 12 // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(37.640695, 127.147675), // 지도의 중심좌표
+        level: 11 // 지도의 확대 레벨
     };
 
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+var OriginalLocation = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 // 마커가 표시될 위치입니다 
 var positions = [
@@ -77,19 +45,7 @@ var positions = [
   {
     title: '(주)에스지오',
     latLng: new kakao.maps.LatLng(37.402056, 126.686377)
-  }
-];
-
-// 마커를 생성합니다
-for(let i = 0; i < positions.length; i++) {
-  var marker = new kakao.maps.Marker({
-      map: map,
-      position: positions[i].latLng,
-      title: positions[i].title
-  });
-}
-
-var positions2 = [
+  },
   {
     title: '대웅건설(주)',
     latLng: new kakao.maps.LatLng(37.035640, 127.604745)
@@ -103,35 +59,48 @@ var positions2 = [
     latLng: new kakao.maps.LatLng(37.179881, 128.976808)
   },
   {
-    title: '송광건설기계',
-    latLng: new kakao.maps.LatLng(37.168421, 126.895548)
-  },
-  {
     title: '금성건설기계',
     latLng: new kakao.maps.LatLng(36.890148, 127.481973)
   },
   {
-    title: '한내건설(주)',
-    latLng: new kakao.maps.LatLng(36.941485, 127.688740)
+    title: '송광건설기계',
+    latLng: new kakao.maps.LatLng(37.168421, 126.895548)
   },
   {
     title: '솔리메틱스',
     latLng: new kakao.maps.LatLng(37.868999, 127.738249)
+  },
+  {
+    title: '한내건설(주)',
+    latLng: new kakao.maps.LatLng(36.941485, 127.688740)
   }
 ];
 
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
+/*각 기업 클릭 시 위치 마커 생성*/
+for(let i = 0; i < 14; i++) {
+    document.querySelector('#graph').classList.add('hide');
+    
+    document.querySelector('.li' + i).addEventListener('click', function() {
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = { 
+            center: positions[i].latLng, // 지도의 중심좌표
+            level: 9 // 지도의 확대 레벨
+        };
+        var mapLoaction = new kakao.maps.Map(mapContainer, mapOption);
+        
+        var marker = new kakao.maps.Marker({ // 지도 마커 위치 표시
+            map: mapLoaction,
+            position: positions[i].latLng,
+            title: positions[i].title
+        });
+        marker.setMap(mapLoaction);
+         
+        document.querySelector('#graph').classList.remove('hide');
+        document.querySelector('#graph' + i).classList.remove('hide');
+    })
+}
 
- // 아래 코드는 지도 위의 마커를 제거하는 코드입니다 
-//marker.setMap(null);
-
-let li1 = document.querySelector('.li1');
-li1.addEventListener('click', function() {
-  makerPosition = new kakao.maps.LatLng(37.673594, 126.865950); 
-})
-
-/* Graph1 */
+/* First Graph1 */
 Highcharts.chart('container1', {
     data: {
       table: 'datatable'
@@ -157,7 +126,7 @@ Highcharts.chart('container1', {
     }
 });
 
-/* Graph2 */
+/* First Graph2 */
 Highcharts.chart('container2', {
   chart: {
       type: 'spline'
@@ -216,7 +185,7 @@ Highcharts.chart('container2', {
   }]
 });
 
-/* Graph3 */
+/* First Graph3 */
 let filename1 = 'data1.csv';
 let filename2 = 'data2.csv';
 
@@ -292,4 +261,446 @@ d3.csv(filename2).then(function(d2) {
       }
     });
   });
+});
+
+/* Second Graph1 */
+Highcharts.chart('container4', {
+  chart: {
+      type: 'column'
+  },
+  title: {
+      align: 'left',
+      text: 'Browser market shares. January, 2018'
+  },
+  subtitle: {
+      align: 'left',
+      text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+  },
+  accessibility: {
+      announceNewData: {
+          enabled: true
+      }
+  },
+  xAxis: {
+      type: 'category'
+  },
+  yAxis: {
+      title: {
+          text: 'Total percent market share'
+      }
+
+  },
+  legend: {
+      enabled: false
+  },
+  plotOptions: {
+      series: {
+          borderWidth: 0,
+          dataLabels: {
+              enabled: true,
+              format: '{point.y:.1f}%'
+          }
+      }
+  },
+
+  tooltip: {
+      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+  },
+
+  series: [
+      {
+          name: "Browsers",
+          colorByPoint: true,
+          data: [
+              {
+                  name: "Chrome",
+                  y: 62.74,
+                  drilldown: "Chrome"
+              },
+              {
+                  name: "Firefox",
+                  y: 10.57,
+                  drilldown: "Firefox"
+              },
+              {
+                  name: "Internet Explorer",
+                  y: 7.23,
+                  drilldown: "Internet Explorer"
+              },
+              {
+                  name: "Safari",
+                  y: 5.58,
+                  drilldown: "Safari"
+              },
+              {
+                  name: "Edge",
+                  y: 4.02,
+                  drilldown: "Edge"
+              },
+              {
+                  name: "Opera",
+                  y: 1.92,
+                  drilldown: "Opera"
+              },
+              {
+                  name: "Other",
+                  y: 7.62,
+                  drilldown: null
+              }
+          ]
+      }
+  ],
+  drilldown: {
+      breadcrumbs: {
+          position: {
+              align: 'right'
+          }
+      },
+      series: [
+          {
+              name: "Chrome",
+              id: "Chrome",
+              data: [
+                  [
+                      "v65.0",
+                      0.1
+                  ],
+                  [
+                      "v64.0",
+                      1.3
+                  ],
+                  [
+                      "v63.0",
+                      53.02
+                  ],
+                  [
+                      "v62.0",
+                      1.4
+                  ],
+                  [
+                      "v61.0",
+                      0.88
+                  ],
+                  [
+                      "v60.0",
+                      0.56
+                  ],
+                  [
+                      "v59.0",
+                      0.45
+                  ],
+                  [
+                      "v58.0",
+                      0.49
+                  ],
+                  [
+                      "v57.0",
+                      0.32
+                  ],
+                  [
+                      "v56.0",
+                      0.29
+                  ],
+                  [
+                      "v55.0",
+                      0.79
+                  ],
+                  [
+                      "v54.0",
+                      0.18
+                  ],
+                  [
+                      "v51.0",
+                      0.13
+                  ],
+                  [
+                      "v49.0",
+                      2.16
+                  ],
+                  [
+                      "v48.0",
+                      0.13
+                  ],
+                  [
+                      "v47.0",
+                      0.11
+                  ],
+                  [
+                      "v43.0",
+                      0.17
+                  ],
+                  [
+                      "v29.0",
+                      0.26
+                  ]
+              ]
+          },
+          {
+              name: "Firefox",
+              id: "Firefox",
+              data: [
+                  [
+                      "v58.0",
+                      1.02
+                  ],
+                  [
+                      "v57.0",
+                      7.36
+                  ],
+                  [
+                      "v56.0",
+                      0.35
+                  ],
+                  [
+                      "v55.0",
+                      0.11
+                  ],
+                  [
+                      "v54.0",
+                      0.1
+                  ],
+                  [
+                      "v52.0",
+                      0.95
+                  ],
+                  [
+                      "v51.0",
+                      0.15
+                  ],
+                  [
+                      "v50.0",
+                      0.1
+                  ],
+                  [
+                      "v48.0",
+                      0.31
+                  ],
+                  [
+                      "v47.0",
+                      0.12
+                  ]
+              ]
+          },
+          {
+              name: "Internet Explorer",
+              id: "Internet Explorer",
+              data: [
+                  [
+                      "v11.0",
+                      6.2
+                  ],
+                  [
+                      "v10.0",
+                      0.29
+                  ],
+                  [
+                      "v9.0",
+                      0.27
+                  ],
+                  [
+                      "v8.0",
+                      0.47
+                  ]
+              ]
+          },
+          {
+              name: "Safari",
+              id: "Safari",
+              data: [
+                  [
+                      "v11.0",
+                      3.39
+                  ],
+                  [
+                      "v10.1",
+                      0.96
+                  ],
+                  [
+                      "v10.0",
+                      0.36
+                  ],
+                  [
+                      "v9.1",
+                      0.54
+                  ],
+                  [
+                      "v9.0",
+                      0.13
+                  ],
+                  [
+                      "v5.1",
+                      0.2
+                  ]
+              ]
+          },
+          {
+              name: "Edge",
+              id: "Edge",
+              data: [
+                  [
+                      "v16",
+                      2.6
+                  ],
+                  [
+                      "v15",
+                      0.92
+                  ],
+                  [
+                      "v14",
+                      0.4
+                  ],
+                  [
+                      "v13",
+                      0.1
+                  ]
+              ]
+          },
+          {
+              name: "Opera",
+              id: "Opera",
+              data: [
+                  [
+                      "v50.0",
+                      0.96
+                  ],
+                  [
+                      "v49.0",
+                      0.82
+                  ],
+                  [
+                      "v12.1",
+                      0.14
+                  ]
+              ]
+          }
+      ]
+  }
+});
+
+/* Second Graph2 */
+Highcharts.chart('container5', {
+  chart: {
+      type: 'spline',
+      inverted: true
+  },
+  title: {
+      text: 'Atmosphere Temperature by Altitude'
+  },
+  subtitle: {
+      text: 'According to the Standard Atmosphere Model'
+  },
+  xAxis: {
+      reversed: false,
+      title: {
+          enabled: true,
+          text: 'Altitude'
+      },
+      labels: {
+          format: '{value} km'
+      },
+      accessibility: {
+          rangeDescription: 'Range: 0 to 80 km.'
+      },
+      maxPadding: 0.05,
+      showLastLabel: true
+  },
+  yAxis: {
+      title: {
+          text: 'Temperature'
+      },
+      labels: {
+          format: '{value}°'
+      },
+      accessibility: {
+          rangeDescription: 'Range: -90°C to 20°C.'
+      },
+      lineWidth: 2
+  },
+  legend: {
+      enabled: false
+  },
+  tooltip: {
+      headerFormat: '<b>{series.name}</b><br/>',
+      pointFormat: '{point.x} km: {point.y}°C'
+  },
+  plotOptions: {
+      spline: {
+          marker: {
+              enable: false
+          }
+      }
+  },
+  series: [{
+      name: 'Temperature',
+      data: [[0, 15], [10, -50], [20, -56.5], [30, -46.5], [40, -22.1],
+          [50, -2.5], [60, -27.7], [70, -55.7], [80, -76.5]]
+  }]
+});
+
+/* Second Graph3 */
+Highcharts.chart('container6', {
+  chart: {
+      type: 'bar'
+  },
+  title: {
+      text: 'Historic World Population by Region'
+  },
+  subtitle: {
+      text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+  },
+  xAxis: {
+      categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+      title: {
+          text: null
+      }
+  },
+  yAxis: {
+      min: 0,
+      title: {
+          text: 'Population (millions)',
+          align: 'high'
+      },
+      labels: {
+          overflow: 'justify'
+      }
+  },
+  tooltip: {
+      valueSuffix: ' millions'
+  },
+  plotOptions: {
+      bar: {
+          dataLabels: {
+              enabled: true
+          }
+      }
+  },
+  legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'top',
+      x: -40,
+      y: 80,
+      floating: true,
+      borderWidth: 1,
+      backgroundColor:
+          Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+      shadow: true
+  },
+  credits: {
+      enabled: false
+  },
+  series: [{
+      name: 'Year 1800',
+      data: [107, 31, 635, 203, 2]
+  }, {
+      name: 'Year 1900',
+      data: [133, 156, 947, 408, 6]
+  }, {
+      name: 'Year 2000',
+      data: [814, 841, 3714, 727, 31]
+  }, {
+      name: 'Year 2016',
+      data: [1216, 1001, 4436, 738, 40]
+  }]
 });
