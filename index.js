@@ -78,9 +78,8 @@ var positions = [
 
 /*각 기업 클릭 시 위치 마커 생성*/
 for(let i = 0; i < 14; i++) {
-    document.querySelector('#graph').classList.add('hide');
-    
-    document.querySelector('.li' + i).addEventListener('click', function() {
+    document.querySelector('.li' + i).addEventListener('click', function(e) {
+        console.log(e.target.className)
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = { 
             center: positions[i].latLng, // 지도의 중심좌표
@@ -94,9 +93,15 @@ for(let i = 0; i < 14; i++) {
             title: positions[i].title
         });
         marker.setMap(mapLoaction);
-         
-        document.querySelector('#graph').classList.remove('hide');
-        document.querySelector('#graph' + i).classList.remove('hide');
+        
+        if(e.target.className === 'li0') {
+            document.querySelector('.graph0').classList.remove('hide');
+            document.querySelector('.graph1').classList.add('hide');
+        }
+        else if(e.target.className === 'li1') {
+            document.querySelector('.graph1').classList.remove('hide');
+            document.querySelector('.graph0').classList.add('hide');
+        }
     })
 }
 
