@@ -1,0 +1,182 @@
+body { 
+  background: linear-gradient(to bottom, rgb(30, 49, 66), rgb(99, 110, 114), rgb(30, 49, 66));
+  background-color: rgb(30, 49, 66); }
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.contents {
+    position: static;
+    margin: 1em auto;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+#menu {
+    display: inline-block;
+    width: 310px;
+    bottom: 130px;
+    margin-top: 130px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: white;
+    background-color: rgba(24, 38, 51, 0.4);
+    border: 1px solid rgb(46, 70, 88);
+    border-radius: 10px 10px 10px 10px;
+    opacity: 0.7;
+}
+#menu li a {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+}
+#menu li:hover { background-color: rgb(156, 187, 187); }
+
+.list {
+    overflow-y: scroll;
+    height: 250px;
+}
+
+li { 
+    list-style: none;
+    padding: 15px;
+}
+
+h1 {
+    font-size: 25px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/*Map Api Css*/
+#map { 
+    display: inline-block;
+    margin-left: 20px; 
+    margin-right: 20px;
+    top: 230px;
+    border-radius: 10px;
+    position: fixed;
+}
+
+/*Graph1*/
+.highcharts-figure .chart-container {
+  width: 300px;
+  height: 200px;
+  margin-top: 130px;
+  float: left;
+}
+
+.highcharts-figure,
+.highcharts-data-table table {
+  width: 600px;
+  float: right;
+  margin: 0;
+}
+
+.highcharts-background { opacity: 0.7; }
+
+.highcharts-data-table table { 
+  font-family: Verdana, sans-serif;
+  border-collapse: collapse;
+  border: 1px solid #ebebeb;
+  margin: 10px auto;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
+}
+
+.highcharts-data-table th {
+  font-weight: 600;
+  padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+  padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}
+
+/*Graph2*/
+.highcharts-figure2,
+.highcharts-data-table table {
+    width: 310px;
+    margin: 0;
+    border: 1px solid rgb(46, 70, 88);
+    border-radius: 10px 10px 10px 10px;
+}
+
+#container2 {
+    width: 310px;
+    height: 500px;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+#container-speed {
+  border-radius: 10px 0px 0px 10px;
+  position: fixed;
+  margin-left: 700px;
+}
+#container-rpm {
+  border-radius: 0px 10px 10px 0px;
+  position: fixed;
+  margin-left: 1000px;
+}
+
+/*Graph4*/
+#chartdiv {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  width: 500px;
+  height: 500px;
+}
