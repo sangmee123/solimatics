@@ -1,17 +1,6 @@
-nav {
-    padding-left: 15%;
-}
-
-span { 
-    margin-top: 0; 
-    margin-bottom: 0; 
-}
-
-.date { 
-    font-size: 25px;
-    float: right; 
-    margin-right: 30%;
-}
+body { 
+  background: linear-gradient(to bottom, rgb(30, 49, 66), rgb(99, 110, 114), rgb(30, 49, 66));
+  background-color: rgb(30, 49, 66); }
 
 a {
     text-decoration: none;
@@ -19,17 +8,24 @@ a {
 }
 
 .contents {
-    margin-left: 15%;
+    position: static;
+    margin: 1em auto;
     display: inline-block;
     margin-top: 30px;
 }
 
 #menu {
     display: inline-block;
-    width: 500px;
-    height: 50%;
+    width: 310px;
+    bottom: 130px;
+    margin-top: 130px;
+    margin-bottom: 30px;
     text-align: center;
-    color: black;
+    color: white;
+    background-color: rgba(24, 38, 51, 0.4);
+    border: 1px solid rgb(46, 70, 88);
+    border-radius: 10px 10px 10px 10px;
+    opacity: 0.7;
 }
 #menu li a {
     display: block;
@@ -40,7 +36,7 @@ a {
 
 .list {
     overflow-y: scroll;
-    height: 450px;
+    height: 250px;
 }
 
 li { 
@@ -54,87 +50,81 @@ h1 {
     margin-bottom: 30px;
 }
 
-.hide { display: none; }
-
 /*Map Api Css*/
 #map { 
     display: inline-block;
-    position: absolute;
-    margin-left: 80px; 
-    margin-top: 110px;
+    margin-left: 20px; 
+    margin-right: 20px;
+    top: 230px;
     border-radius: 10px;
+    position: fixed;
 }
 
-.olControlAttribution{ right:20px; }
-.olControlLayerSwitcher{ right:20px; top:20px; }  
-
-#line { color:dimgray }
-
-#graph {
-    position: relative;
-    margin-left: 11%;
+/*Graph1*/
+.highcharts-figure .chart-container {
+  width: 300px;
+  height: 200px;
+  margin-top: 130px;
+  float: left;
 }
 
-/*First Graph1, 2, 3*/
-.highcharts-figure1, .highcharts-figure2, .highcharts-figure3,
+.highcharts-figure,
 .highcharts-data-table table {
-    border: 1px solid rgb(163, 162, 162);
-    padding: 20px;
-    float: left;
-    min-width: 450px;
-    max-width: 500px;
-    margin-right: 10px;
-}
-  
-#datatable {
-    font-family: Verdana, sans-serif;
-    border-collapse: collapse;
-    border: 1px solid #ebebeb;
-    margin: 10px auto;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
+  width: 600px;
+  float: right;
+  margin: 0;
 }
 
-#datatable caption {
-    padding: 1em 0;
-    font-size: 1.2em;
-    color: #555;
+.highcharts-background { opacity: 0.7; }
+
+.highcharts-data-table table { 
+  font-family: Verdana, sans-serif;
+  border-collapse: collapse;
+  border: 1px solid #ebebeb;
+  margin: 10px auto;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
 }
 
-#datatable th {
-    font-weight: 600;
-    padding: 0.5em;
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
 }
 
-#datatable td,
-#datatable th,
-#datatable caption {
-    padding: 0.5em;
+.highcharts-data-table th {
+  font-weight: 600;
+  padding: 0.5em;
 }
 
-#datatable thead tr,
-#datatable tr:nth-child(even) {
-    background: #f8f8f8;
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+  padding: 0.5em;
 }
 
-#datatable tr:hover {
-    background: #f1f7ff;
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
 }
 
-/* Second Graph1 */
-.highcharts-figure4,
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}
+
+/*Graph2*/
+.highcharts-figure2,
 .highcharts-data-table table {
-    border: 1px solid rgb(163, 162, 162);
-    padding: 20px;
-    float: left;
-    min-width: 450px;
-    max-width: 500px;
-    margin-right: 10px;
+    width: 310px;
+    margin: 0;
+    border: 1px solid rgb(46, 70, 88);
+    border-radius: 10px 10px 10px 10px;
 }
 
-#container4 {
-    height: 400px;
+#container2 {
+    width: 310px;
+    height: 500px;
 }
 
 .highcharts-data-table table {
@@ -173,101 +163,20 @@ h1 {
     background: #f1f7ff;
 }
 
-
-/* Second Graph2 */
-.highcharts-figure5,
-.highcharts-data-table table {
-    border: 1px solid rgb(163, 162, 162);
-    padding: 20px;
-    float: left;
-    min-width: 450px;
-    max-width: 500px;
-    margin-right: 10px;
+#container-speed {
+  border-radius: 10px 0px 0px 10px;
+  position: fixed;
+  margin-left: 700px;
+}
+#container-rpm {
+  border-radius: 0px 10px 10px 0px;
+  position: fixed;
+  margin-left: 1000px;
 }
 
-.highcharts-data-table table {
-    font-family: Verdana, sans-serif;
-    border-collapse: collapse;
-    border: 1px solid #ebebeb;
-    margin: 10px auto;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
-}
-
-.highcharts-data-table caption {
-    padding: 1em 0;
-    font-size: 1.2em;
-    color: #555;
-}
-
-.highcharts-data-table th {
-    font-weight: 600;
-    padding: 0.5em;
-}
-
-.highcharts-data-table td,
-.highcharts-data-table th,
-.highcharts-data-table caption {
-    padding: 0.5em;
-}
-
-.highcharts-data-table thead tr,
-.highcharts-data-table tr:nth-child(even) {
-    background: #f8f8f8;
-}
-
-.highcharts-data-table tr:hover {
-    background: #f1f7ff;
-}
-
-/* Second Graph3 */
-.highcharts-figure6,
-.highcharts-data-table table {
-    border: 1px solid rgb(163, 162, 162);
-    padding: 20px;
-    float: left;
-    min-width: 450px;
-    max-width: 500px;
-    margin-right: 10px;
-}
-
-#container6 {
-    height: 400px;
-}
-
-.highcharts-data-table table {
-    font-family: Verdana, sans-serif;
-    border-collapse: collapse;
-    border: 1px solid #ebebeb;
-    margin: 10px auto;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
-}
-
-.highcharts-data-table caption {
-    padding: 1em 0;
-    font-size: 1.2em;
-    color: #555;
-}
-
-.highcharts-data-table th {
-    font-weight: 600;
-    padding: 0.5em;
-}
-
-.highcharts-data-table td,
-.highcharts-data-table th,
-.highcharts-data-table caption {
-    padding: 0.5em;
-}
-
-.highcharts-data-table thead tr,
-.highcharts-data-table tr:nth-child(even) {
-    background: #f8f8f8;
-}
-
-.highcharts-data-table tr:hover {
-    background: #f1f7ff;
+/*Graph4*/
+#chartdiv {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  width: 500px;
+  height: 500px;
 }

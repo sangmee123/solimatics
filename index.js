@@ -1,11 +1,11 @@
 /*navBar 날짜 표시*/
-var today = new Date();
-var year = today.getFullYear();
-var month = ('0' + (today.getMonth() + 1)).slice(-2);
-var day = ('0' + today.getDate()).slice(-2);
+// var today = new Date();
+// var year = today.getFullYear();
+// var month = ('0' + (today.getMonth() + 1)).slice(-2);
+// var day = ('0' + today.getDate()).slice(-2);
 
-var dateString = year + '. ' + month + '. ' + day + '.';
-document.querySelector('.date').innerHTML = dateString;
+// var dateString = year + '. ' + month + '. ' + day + '.';
+// document.querySelector('.date').innerHTML = dateString;
 
 /*Map API*/
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -93,560 +93,169 @@ for(let i = 0; i < 14; i++) {
             title: positions[i].title
         });
         marker.setMap(mapLoaction);
-        
-        if(e.target.className === 'li0') {
-            document.querySelector('.graph0').classList.remove('hide');
-            document.querySelector('.graph1').classList.add('hide');
-        }
-        else if(e.target.className === 'li1') {
-            document.querySelector('.graph1').classList.remove('hide');
-            document.querySelector('.graph0').classList.add('hide');
-        }
     })
 }
 
-/* First Graph1 */
-Highcharts.chart('container1', {
-    data: {
-      table: 'datatable'
-    },
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: '2021년 2분기 글로벌 스마트폰 시장 점유율'
-    },
-    subtitle: {
-        text: '[단위: 억원]'
-    },
-    yAxis: {
-        max: 100,
-        allowDecimals: false,
-    },
-    tooltip: {
-      formatter: function () {
-        return '<b>' + this.series.name + '</b><br/>' +
-          this.point.y + ' ' + this.point.name.toLowerCase();
-      }
-    }
-});
+/*Graph1*/
+var gaugeOptions = {
+  chart: {
+      type: 'solidgauge',
+      backgroundColor: 'rgba(24, 38, 51, 0.4)'
+  },
 
-/* First Graph2 */
+  title: null,
+
+  pane: {
+      center: ['50%', '85%'],
+      size: '140%',
+      startAngle: -90,
+      endAngle: 90,
+      background: {
+          backgroundColor:
+              Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
+          innerRadius: '60%',
+          outerRadius: '100%',
+          shape: 'arc'
+      }
+  },
+
+  exporting: {
+      enabled: false
+  },
+
+  tooltip: {
+      enabled: false
+  },
+
+  // the value axis
+  yAxis: {
+      stops: [
+          [0.1, '#55BF3B'], // green
+          [0.5, '#DDDF0D'], // yellow
+          [0.9, '#DF5353'] // red
+      ],
+      lineWidth: 0,
+      tickWidth: 0,
+      minorTickInterval: null,
+      tickAmount: 2,
+      title: {
+          y: -70
+      },
+      labels: {
+          y: 16
+      }
+  },
+
+  plotOptions: {
+      solidgauge: {
+          dataLabels: {
+              y: 5,
+              borderWidth: 0,
+              useHTML: true
+          }
+      }
+  }
+};
+
+// The speed gauge
+var chartSpeed = Highcharts.chart('container-speed', Highcharts.merge(gaugeOptions, {
+  yAxis: {
+      min: 0,
+      max: 200,
+      title: {
+          text: 'Speed'
+      }
+  },
+
+  credits: {
+      enabled: false
+  },
+
+  series: [{
+      name: 'Speed',
+      data: [80],
+      dataLabels: {
+          format:
+              '<div style="text-align:center">' +
+              '<span style="font-size:25px">{y}</span><br/>' +
+              '<span style="font-size:12px;opacity:0.4">km/h</span>' +
+              '</div>'
+      },
+      tooltip: {
+          valueSuffix: ' km/h'
+      }
+  }]
+
+}));
+
+// The RPM gauge
+var chartRpm = Highcharts.chart('container-rpm', Highcharts.merge(gaugeOptions, {
+  yAxis: {
+      min: 0,
+      max: 5,
+      title: {
+          text: 'RPM'
+      }
+  },
+
+  series: [{
+      name: 'RPM',
+      data: [1],
+      dataLabels: {
+          format:
+              '<div style="text-align:center">' +
+              '<span style="font-size:25px">{y:.1f}</span><br/>' +
+              '<span style="font-size:12px;opacity:0.4">' +
+              '* 1000 / min' +
+              '</span>' +
+              '</div>'
+      },
+      tooltip: {
+          valueSuffix: ' revolutions/min'
+      }
+  }]
+
+}));
+
+// Bring life to the dials
+setInterval(function () {
+  // Speed
+  var point,
+      newVal,
+      inc;
+
+  if (chartSpeed) {
+      point = chartSpeed.series[0].points[0];
+      inc = Math.round((Math.random() - 0.5) * 100);
+      newVal = point.y + inc;
+
+      if (newVal < 0 || newVal > 200) {
+          newVal = point.y - inc;
+      }
+
+      point.update(newVal);
+  }
+
+  // RPM
+  if (chartRpm) {
+      point = chartRpm.series[0].points[0];
+      inc = Math.random() - 0.5;
+      newVal = point.y + inc;
+
+      if (newVal < 0 || newVal > 5) {
+          newVal = point.y - inc;
+      }
+
+      point.update(newVal);
+  }
+}, 2000);
+
+
+/*Graph2*/
 Highcharts.chart('container2', {
   chart: {
-      type: 'spline'
-  },
-  title: {
-      text: 'Monthly Average Temperature'
-  },
- 
-  xAxis: {
-      categories: ['1월', '3월', '6월', '9월', '12월', '']
-  },
-  yAxis: {
-      title: {
-          text: 'Temperature'
-      },
-      labels: {
-          formatter: function () {
-              return this.value + '°';
-          }
-      }
-  },
-  tooltip: {
-      crosshairs: true,
-      shared: true
-  },
-  plotOptions: {
-      spline: {
-          marker: {
-              radius: 4,
-              lineColor: '#666666',
-              lineWidth: 1
-          }
-      }
-  },
-  series: [{
-      name: '자연광',
-      marker: {
-          enabled: false
-      },
-      data: [7.0, 25.0, 50.0, {
-          y: 89,
-          marker: { 
-              enabled: false
-          }
-      }, 56.3, 11.0]
-
-  }, {
-      name: '인공지능',
-      color: 'red',
-      marker: {
-          enabled: false
-      },
-      data: [60.0, 61.7, 65.9,{
-          y: 80.5,
-      }, 65.2, 60.5]
-  }]
-});
-
-/* First Graph3 */
-let filename1 = 'data1.csv';
-let filename2 = 'data2.csv';
-
-d3.csv(filename2).then(function(d2) {
-  d3.csv(filename1).then(function (d1) {
-    let val1 = [];
-    let val2 = [];
-
-    for (let i = 0; i < d1.columns.length; i++) {
-      val1.push(parseInt(d1.columns[i]));
-    }
-    console.log("ARR1", val1);
-    
-    for (let i = 0; i < d2.columns.length; i++) {
-      val2.push(parseInt(d2.columns[i]));
-    }
-    console.log("ARR2", val2);
-    
-    Highcharts.chart('container3', {
-      title: {
-        text: 'PM2.5 집진 성능 시험'
-      },
-    
-      yAxis: { 
-        min: 0,
-        max: 5200,
-        title: {
-          text: '분진농도(µg/m3)'
-        },
-      },
-    
-      xAxis:{
-          min: 0,
-          max: 30
-      },    
-    
-      legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-      },
-    
-      plotOptions: {
-        series: {
-          label: {
-            connectorAllowed: false
-          },
-          pointStart: 0
-        }
-      },
-    
-      series: [{
-        name: '30분만에 제거',
-        data: val1
-      }, {
-        name: '자연감소',
-        data: val2
-      }],
-    
-      responsive: {
-        rules: [{
-          condition: {
-            maxWidth: 500
-          },
-          chartOptions: {
-            legend: {
-              layout: 'horizontal',
-              align: 'center',
-              verticalAlign: 'bottom'
-            }
-          }
-        }]
-      }
-    });
-  });
-});
-
-/* Second Graph1 */
-Highcharts.chart('container4', {
-  chart: {
-      type: 'column'
-  },
-  title: {
-      align: 'left',
-      text: 'Browser market shares. January, 2018'
-  },
-  subtitle: {
-      align: 'left',
-      text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
-  },
-  accessibility: {
-      announceNewData: {
-          enabled: true
-      }
-  },
-  xAxis: {
-      type: 'category'
-  },
-  yAxis: {
-      title: {
-          text: 'Total percent market share'
-      }
-
-  },
-  legend: {
-      enabled: false
-  },
-  plotOptions: {
-      series: {
-          borderWidth: 0,
-          dataLabels: {
-              enabled: true,
-              format: '{point.y:.1f}%'
-          }
-      }
-  },
-
-  tooltip: {
-      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-  },
-
-  series: [
-      {
-          name: "Browsers",
-          colorByPoint: true,
-          data: [
-              {
-                  name: "Chrome",
-                  y: 62.74,
-                  drilldown: "Chrome"
-              },
-              {
-                  name: "Firefox",
-                  y: 10.57,
-                  drilldown: "Firefox"
-              },
-              {
-                  name: "Internet Explorer",
-                  y: 7.23,
-                  drilldown: "Internet Explorer"
-              },
-              {
-                  name: "Safari",
-                  y: 5.58,
-                  drilldown: "Safari"
-              },
-              {
-                  name: "Edge",
-                  y: 4.02,
-                  drilldown: "Edge"
-              },
-              {
-                  name: "Opera",
-                  y: 1.92,
-                  drilldown: "Opera"
-              },
-              {
-                  name: "Other",
-                  y: 7.62,
-                  drilldown: null
-              }
-          ]
-      }
-  ],
-  drilldown: {
-      breadcrumbs: {
-          position: {
-              align: 'right'
-          }
-      },
-      series: [
-          {
-              name: "Chrome",
-              id: "Chrome",
-              data: [
-                  [
-                      "v65.0",
-                      0.1
-                  ],
-                  [
-                      "v64.0",
-                      1.3
-                  ],
-                  [
-                      "v63.0",
-                      53.02
-                  ],
-                  [
-                      "v62.0",
-                      1.4
-                  ],
-                  [
-                      "v61.0",
-                      0.88
-                  ],
-                  [
-                      "v60.0",
-                      0.56
-                  ],
-                  [
-                      "v59.0",
-                      0.45
-                  ],
-                  [
-                      "v58.0",
-                      0.49
-                  ],
-                  [
-                      "v57.0",
-                      0.32
-                  ],
-                  [
-                      "v56.0",
-                      0.29
-                  ],
-                  [
-                      "v55.0",
-                      0.79
-                  ],
-                  [
-                      "v54.0",
-                      0.18
-                  ],
-                  [
-                      "v51.0",
-                      0.13
-                  ],
-                  [
-                      "v49.0",
-                      2.16
-                  ],
-                  [
-                      "v48.0",
-                      0.13
-                  ],
-                  [
-                      "v47.0",
-                      0.11
-                  ],
-                  [
-                      "v43.0",
-                      0.17
-                  ],
-                  [
-                      "v29.0",
-                      0.26
-                  ]
-              ]
-          },
-          {
-              name: "Firefox",
-              id: "Firefox",
-              data: [
-                  [
-                      "v58.0",
-                      1.02
-                  ],
-                  [
-                      "v57.0",
-                      7.36
-                  ],
-                  [
-                      "v56.0",
-                      0.35
-                  ],
-                  [
-                      "v55.0",
-                      0.11
-                  ],
-                  [
-                      "v54.0",
-                      0.1
-                  ],
-                  [
-                      "v52.0",
-                      0.95
-                  ],
-                  [
-                      "v51.0",
-                      0.15
-                  ],
-                  [
-                      "v50.0",
-                      0.1
-                  ],
-                  [
-                      "v48.0",
-                      0.31
-                  ],
-                  [
-                      "v47.0",
-                      0.12
-                  ]
-              ]
-          },
-          {
-              name: "Internet Explorer",
-              id: "Internet Explorer",
-              data: [
-                  [
-                      "v11.0",
-                      6.2
-                  ],
-                  [
-                      "v10.0",
-                      0.29
-                  ],
-                  [
-                      "v9.0",
-                      0.27
-                  ],
-                  [
-                      "v8.0",
-                      0.47
-                  ]
-              ]
-          },
-          {
-              name: "Safari",
-              id: "Safari",
-              data: [
-                  [
-                      "v11.0",
-                      3.39
-                  ],
-                  [
-                      "v10.1",
-                      0.96
-                  ],
-                  [
-                      "v10.0",
-                      0.36
-                  ],
-                  [
-                      "v9.1",
-                      0.54
-                  ],
-                  [
-                      "v9.0",
-                      0.13
-                  ],
-                  [
-                      "v5.1",
-                      0.2
-                  ]
-              ]
-          },
-          {
-              name: "Edge",
-              id: "Edge",
-              data: [
-                  [
-                      "v16",
-                      2.6
-                  ],
-                  [
-                      "v15",
-                      0.92
-                  ],
-                  [
-                      "v14",
-                      0.4
-                  ],
-                  [
-                      "v13",
-                      0.1
-                  ]
-              ]
-          },
-          {
-              name: "Opera",
-              id: "Opera",
-              data: [
-                  [
-                      "v50.0",
-                      0.96
-                  ],
-                  [
-                      "v49.0",
-                      0.82
-                  ],
-                  [
-                      "v12.1",
-                      0.14
-                  ]
-              ]
-          }
-      ]
-  }
-});
-
-/* Second Graph2 */
-Highcharts.chart('container5', {
-  chart: {
-      type: 'spline',
-      inverted: true
-  },
-  title: {
-      text: 'Atmosphere Temperature by Altitude'
-  },
-  subtitle: {
-      text: 'According to the Standard Atmosphere Model'
-  },
-  xAxis: {
-      reversed: false,
-      title: {
-          enabled: true,
-          text: 'Altitude'
-      },
-      labels: {
-          format: '{value} km'
-      },
-      accessibility: {
-          rangeDescription: 'Range: 0 to 80 km.'
-      },
-      maxPadding: 0.05,
-      showLastLabel: true
-  },
-  yAxis: {
-      title: {
-          text: 'Temperature'
-      },
-      labels: {
-          format: '{value}°'
-      },
-      accessibility: {
-          rangeDescription: 'Range: -90°C to 20°C.'
-      },
-      lineWidth: 2
-  },
-  legend: {
-      enabled: false
-  },
-  tooltip: {
-      headerFormat: '<b>{series.name}</b><br/>',
-      pointFormat: '{point.x} km: {point.y}°C'
-  },
-  plotOptions: {
-      spline: {
-          marker: {
-              enable: false
-          }
-      }
-  },
-  series: [{
-      name: 'Temperature',
-      data: [[0, 15], [10, -50], [20, -56.5], [30, -46.5], [40, -22.1],
-          [50, -2.5], [60, -27.7], [70, -55.7], [80, -76.5]]
-  }]
-});
-
-/* Second Graph3 */
-Highcharts.chart('container6', {
-  chart: {
-      type: 'bar'
+      type: 'bar',
+      backgroundColor: 'rgba(24, 38, 51, 0.4)'
   },
   title: {
       text: 'Historic World Population by Region'
@@ -709,3 +318,332 @@ Highcharts.chart('container6', {
       data: [1216, 1001, 4436, 738, 40]
   }]
 });
+
+/*Graph3*/
+/**
+ * ---------------------------------------
+ * This demo was created using amCharts 5.
+ * 
+ * For more information visit:
+ * https://www.amcharts.com/
+ * 
+ * Documentation is available at:
+ * https://www.amcharts.com/docs/v5/
+ * ---------------------------------------
+ */
+
+// Create root element
+// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+var root = am5.Root.new("chartdiv");
+
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+root.setThemes([
+  am5themes_Animated.new(root)
+]);
+
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/radar-chart/
+var chart = root.container.children.push(am5radar.RadarChart.new(root, {
+  panX: false,
+  panY: false,
+  startAngle: 160,
+  endAngle: 380
+}));
+
+
+// Create axis and its renderer
+// https://www.amcharts.com/docs/v5/charts/radar-chart/gauge-charts/#Axes
+var axisRenderer = am5radar.AxisRendererCircular.new(root, {
+  innerRadius: -40
+});
+
+axisRenderer.grid.template.setAll({
+  stroke: root.interfaceColors.get("background"),
+  visible: true,
+  strokeOpacity: 0.8
+});
+
+var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
+  maxDeviation: 0,
+  min: -40,
+  max: 100,
+  strictMinMax: true,
+  renderer: axisRenderer
+}));
+
+
+// Add clock hand
+// https://www.amcharts.com/docs/v5/charts/radar-chart/gauge-charts/#Clock_hands
+var axisDataItem = xAxis.makeDataItem({});
+
+var clockHand = am5radar.ClockHand.new(root, {
+  pinRadius: am5.percent(20),
+  radius: am5.percent(100),
+  bottomWidth: 40
+})
+
+var bullet = axisDataItem.set("bullet", am5xy.AxisBullet.new(root, {
+  sprite: clockHand
+}));
+
+xAxis.createAxisRange(axisDataItem);
+
+var label = chart.radarContainer.children.push(am5.Label.new(root, {
+  fill: am5.color(0xffffff),
+  centerX: am5.percent(50),
+  textAlign: "center",
+  centerY: am5.percent(50),
+  fontSize: "3em"
+}));
+
+axisDataItem.set("value", 50);
+bullet.get("sprite").on("rotation", function () {
+  var value = axisDataItem.get("value");
+  var text = Math.round(axisDataItem.get("value")).toString();
+  var fill = am5.color(0x000000);
+  xAxis.axisRanges.each(function (axisRange) {
+    if (value >= axisRange.get("value") && value <= axisRange.get("endValue")) {
+      fill = axisRange.get("axisFill").get("fill");
+    }
+  })
+
+  label.set("text", Math.round(value).toString());
+
+  clockHand.pin.animate({ key: "fill", to: fill, duration: 500, easing: am5.ease.out(am5.ease.cubic) })
+  clockHand.hand.animate({ key: "fill", to: fill, duration: 500, easing: am5.ease.out(am5.ease.cubic) })
+});
+
+setInterval(function () {
+  axisDataItem.animate({
+    key: "value",
+    to: Math.round(Math.random() * 140 - 40),
+    duration: 500,
+    easing: am5.ease.out(am5.ease.cubic)
+  });
+}, 2000)
+
+chart.bulletsContainer.set("mask", undefined);
+
+
+// Create axis ranges bands
+// https://www.amcharts.com/docs/v5/charts/radar-chart/gauge-charts/#Bands
+var bandsData = [{
+  title: "Unsustainable",
+  color: "#ee1f25",
+  lowScore: -40,
+  highScore: -20
+}, {
+  title: "Volatile",
+  color: "#f04922",
+  lowScore: -20,
+  highScore: 0
+}, {
+  title: "Foundational",
+  color: "#fdae19",
+  lowScore: 0,
+  highScore: 20
+}, {
+  title: "Developing",
+  color: "#f3eb0c",
+  lowScore: 20,
+  highScore: 40
+}, {
+  title: "Maturing",
+  color: "#b0d136",
+  lowScore: 40,
+  highScore: 60
+}, {
+  title: "Sustainable",
+  color: "#54b947",
+  lowScore: 60,
+  highScore: 80
+}, {
+  title: "High Performing",
+  color: "#0f9747",
+  lowScore: 80,
+  highScore: 100
+}];
+
+am5.array.each(bandsData, function (data) {
+  var axisRange = xAxis.createAxisRange(xAxis.makeDataItem({}));
+
+  axisRange.setAll({
+    value: data.lowScore,
+    endValue: data.highScore
+  });
+
+  axisRange.get("axisFill").setAll({
+    visible: true,
+    fill: am5.color(data.color),
+    fillOpacity: 0.8
+  });
+
+  axisRange.get("label").setAll({
+    text: data.title,
+    inside: true,
+    radius: 15,
+    fontSize: "0.9em",
+    fill: root.interfaceColors.get("background")
+  });
+});
+
+
+// Make stuff animate on load
+chart.appear(1000, 100);
+
+/*Graph4*/
+var root = am5.Root.new("chartdiv");
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+root.setThemes([
+  am5themes_Animated.new(root)
+]);
+
+root.dateFormatter.setAll({
+  dateFields: ["valueX"]
+});
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root.container.children.push(
+  am5xy.XYChart.new(root, {
+    focusable: true,
+    panX: true,
+    panY: true,
+    wheelX: "panX",
+    wheelY: "zoomX",
+  pinchZoomX:true
+  })
+);
+
+// Create line series and related axes
+var xAxis1 = chart.xAxes.push(
+  am5xy.DateAxis.new(root, {
+    maxDeviation: 0.1,
+    tooltipDateFormat: "MMM d, hh:00",
+    baseInterval: { timeUnit: "hour", count: 1 },
+    renderer: am5xy.AxisRendererX.new(root, {
+      minGridDistance: 50
+    }),
+    tooltip: am5.Tooltip.new(root, {})
+  })
+);
+
+xAxis1.get("renderer").labels.template.set("forceHidden", true);
+xAxis1.get("renderer").grid.template.set("forceHidden", true);
+
+var yAxis1 = chart.yAxes.push(
+  am5xy.ValueAxis.new(root, {
+    maxDeviation: 0.1,
+    renderer: am5xy.AxisRendererY.new(root, {})
+  })
+);
+
+yAxis1.get("renderer").labels.template.set("forceHidden", true);
+yAxis1.get("renderer").grid.template.set("forceHidden", true);
+
+var series1 = chart.series.push(
+  am5xy.LineSeries.new(root, {
+    xAxis: xAxis1,
+    yAxis: yAxis1,
+    valueYField: "value",
+    valueXField: "date",
+    tooltip: am5.Tooltip.new(root, {
+      pointerOrientation: "horizontal",
+      labelText: "{valueY}"
+    })
+  })
+);
+
+series1.strokes.template.setAll({
+  strokeWidth: 2
+});
+
+series1.data.setAll(generateHourlyData());
+
+// Create column series and related axes
+var xAxis2 = chart.xAxes.push(
+  am5xy.DateAxis.new(root, {
+    maxDeviation: 0.1,
+    baseInterval: { timeUnit: "day", count: 1 },
+    renderer: am5xy.AxisRendererX.new(root, {
+      minGridDistance: 50
+    })
+  })
+);
+
+var yAxis2 = chart.yAxes.push(
+  am5xy.ValueAxis.new(root, {
+    maxDeviation: 0.1,
+    renderer: am5xy.AxisRendererY.new(root, {})
+  })
+);
+
+var series2 = chart.series.unshift(
+  am5xy.ColumnSeries.new(root, {
+    xAxis: xAxis2,
+    yAxis: yAxis2,
+    valueYField: "value",
+    valueXField: "date",
+    tooltip: am5.Tooltip.new(root, {
+      pointerOrientation: "horizontal",
+      labelText: "{valueY}"
+    })    
+  })
+);
+
+series2.data.setAll(generateDailyData());
+
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+  xAxis: xAxis1
+}));
+cursor.lineY.set("visible", false);
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+series1.appear(1000, 100);
+series2.appear(1000, 100);
+chart.appear(1000, 100);
+
+// Functions to generate random data
+function generateDailyData() {
+  var firstDate = new Date();
+  firstDate.setDate(firstDate.getDate() - 10);
+  firstDate.setHours(0, 0, 0, 0);
+  var data = [];
+  for (var i = 0; i < 10; i++) {
+    var newDate = new Date(firstDate);
+    newDate.setDate(newDate.getDate() + i);
+    data.push({
+      date: newDate.getTime(),
+      value: Math.round(Math.random() * 12) + 1
+    });
+  }
+  return data;
+}
+
+function generateHourlyData() {
+  var firstDate = new Date();
+  firstDate.setDate(firstDate.getDate() - 10);
+  var data = [];
+  for (var i = 0; i < 10 * 24; i++) {
+    var newDate = new Date(firstDate);
+    newDate.setHours(newDate.getHours() + i, 0, 0);
+    if (i == 0) {
+      var value = Math.round(Math.random() * 10) + 1;
+    } else {
+      var value = Math.round(data[data.length - 1].value / 100 * (90 + Math.round(Math.random() * 20)) * 100) / 100;
+    }
+    data.push({
+      date: newDate.getTime(),
+      value: value
+    });
+  }
+  return data;
+}
