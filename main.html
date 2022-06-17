@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+<div class="board">
+    <p id="connect">db 연결중...</p>
+    <p id="debug">debuging.....</p>
+    <p id="result">db Value...</p>
+</div>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script>
+    var index = 0;
+    var timerID;
+    var period = 1000; // 값의 주기 마다 업데이트 합니다. 1000 = 1s(1초)
+    GET_db(); // GET_db 함수를 호출 합니다. 
+    function GET_db() {
+        $.ajax({
+            url: "GET_db.php",
+            type: "get",
+            data: {index: index++ , period: period}
+        }).done(function(data) {// HTTP 요청 성공시 호출 됩니다.
+            data = JSON.parse(data);
+            if(data.tw == "connect"){
+                $('#connect').text("데이터 베이스 연결 성공");
+                $('#debug').text('현재 카운트 값 : ' + data.index +'업데이트 주기 : '+data.period+' 초 입니다!');/*['uid','mac_id','type_no','get_time','value','time'];*/
+                $('#result').text('DB Data : ' + data.uid + ' , '+ data.mac_id+ ' , '+ data.type_no+ ' , '+ data.get_time+ ' , '+ data.value+ ' , '+ data.time + '입니다!');/*['uid','mac_id','type_no','get_time','value','time'];*/
+                if(index == 6){
+                    //clearTimeout(timerID);
+                    index = 0;
+                }
+            }
+        })
+        .fail(function(data) { // HTTP 요청 실패시 호출 됩니다.
+            $('#connect').text("HTTP 요청 이 실패 하였습니다...");
+            $('#debug').text("debuging.....fail");
+            $('#result').text("db Value...fail");
+        })
+        .always(function(data) { // 성공 여부 상관없이 호출 됩니다.
+            
+        });
+        timerID = setTimeout("GET_db()",period);// 1초 단위로 갱신 처리
+    }
+</script>

@@ -1,6 +1,7 @@
 body { 
   background: linear-gradient(to bottom, rgb(30, 49, 66), rgb(99, 110, 114), rgb(30, 49, 66));
-  background-color: rgb(30, 49, 66); }
+  background-color: rgb(30, 49, 66); 
+}
 
 a {
     text-decoration: none;
@@ -65,12 +66,11 @@ h1 {
   width: 300px;
   height: 200px;
   margin-top: 130px;
-  float: left;
+  left: 300px;
 }
 
 .highcharts-figure,
 .highcharts-data-table table {
-  width: 600px;
   float: right;
   margin: 0;
 }
@@ -84,7 +84,6 @@ h1 {
   margin: 10px auto;
   text-align: center;
   width: 100%;
-  max-width: 500px;
 }
 
 .highcharts-data-table caption {
@@ -176,7 +175,9 @@ h1 {
 
 /*Graph4*/
 #chartdiv {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 
+  "Segoe UI", Roboto, Helvetica, Arial, sans-serif, 
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   width: 500px;
   height: 500px;
 }
