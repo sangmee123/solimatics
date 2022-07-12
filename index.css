@@ -136,15 +136,19 @@ h1 {
 /*Graph2*/
 .highcharts-figure2,
 .highcharts-data-table table {
+    display: inline-block;
     width: 310px;
+    height: 500px; 
+    float: left;
     margin: 0;
-    border: 1px solid rgb(46, 70, 88);
-    border-radius: 10px 10px 10px 10px;
 }
 
-#container2 {
+#container2 {  
+    display: inline-block;
     width: 310px;
-    height: 500px;
+    height: 500px; 
+    border: 1px solid rgb(46, 70, 88);
+    border-radius: 10px 10px 10px 10px;
 }
 
 .highcharts-data-table table {
@@ -183,166 +187,71 @@ h1 {
     background: #f1f7ff;
 }
 
-#chartdiv {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  width: 300px;
-  height: 500px;
+/*Graph3*/
+.highcharts-figure3,
+.highcharts-data-table table {
+    display: inline-block;
+    width: 500px;
+    margin: 1em auto;
 }
 
-@media (max-width: 1280px) {
-  body { 
-    background: linear-gradient(to bottom, rgb(30, 49, 66), rgb(99, 110, 114), rgb(30, 49, 66));
-    background-color: rgb(30, 49, 66); 
-    margin: 0 auto;
-    width: 1124px;
-  }
-
-  .date {
-    display: block;
-    font-size: 30px;
-    color: orangered;
-  }
-
-  #menu {
+#container3 { 
     display: inline-block;
-    width: 250px;
-    bottom: 130px;
-    margin-top: 130px;
-    margin-bottom: 30px;
-    text-align: center;
-    color: white;
-    background-color: rgba(24, 38, 51, 0.4);
     border: 1px solid rgb(46, 70, 88);
     border-radius: 10px 10px 10px 10px;
-    opacity: 0.7;
-  }
-  #menu li a {
-      display: block;
-      height: 30px;
-      line-height: 30px;
-  }
+    width:650px;
+    height: 350px;
+    margin-top: 130px; 
+    margin-left: 25px;
+}
 
-  /*Map Api Css*/
-  #map { 
-    display: inline-block;
-    width: 500px; 
-    height: 500px;
-    margin-left: 20px; 
-    margin-right: 20px;
-    margin-top: 160px;
-    border-radius: 10px;
-    position: absolute;
-  }  
-
-  /*Graph1*/
-  #container-speed {
-    border-radius: 10px 0px 0px 10px;
-    position: absolute;
-    margin-left: 500px;
-  }
-  #container-rpm {
-    border-radius: 0px 10px 10px 0px;
-    position: absolute;
-    margin-left: 750px;
-  }
-
-  .highcharts-figure .chart-container {
-    width: 250px;
-    height: 170px;
-    margin-top: 130px;
-    left: 300px;
-  }
-
-  .highcharts-figure,
-  .highcharts-data-table table {
-    float: right;
-    margin: 0;
-  }
-
-  .highcharts-background { opacity: 0.7; }
-
-  .highcharts-data-table table { 
+.highcharts-data-table table {
     font-family: Verdana, sans-serif;
     border-collapse: collapse;
     border: 1px solid #ebebeb;
     margin: 10px auto;
     text-align: center;
     width: 100%;
-  }
+    max-width: 500px;
+}
 
-  .highcharts-data-table caption {
+.highcharts-data-table caption {
     padding: 1em 0;
     font-size: 1.2em;
     color: #555;
-  }
+}
 
-  .highcharts-data-table th {
+.highcharts-data-table th {
     font-weight: 600;
     padding: 0.5em;
-  }
+}
 
-  .highcharts-data-table td,
-  .highcharts-data-table th,
-  .highcharts-data-table caption {
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
     padding: 0.5em;
-  }
+}
 
-  .highcharts-data-table thead tr,
-  .highcharts-data-table tr:nth-child(even) {
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
     background: #f8f8f8;
-  }
+}
 
-  .highcharts-data-table tr:hover {
+.highcharts-data-table tr:hover {
     background: #f1f7ff;
-  }
+}
 
-    /*Graph2*/
-  .highcharts-figure2,
-  .highcharts-data-table table {
-      width: 250px;
-      margin: 0;
-      border: 1px solid rgb(46, 70, 88);
-      border-radius: 10px 10px 10px 10px;
-  }
+/*Graph4*/
+.highcharts-figure4,
+.highcharts-data-table table {
+    display: inline-block;
+    width: 500px;
+    margin-left: 140px;
+}
 
-  #container2 {
-      width: 250px;
-      height: 500px;
-  }
-
-  .highcharts-data-table table {
-      font-family: Verdana, sans-serif;
-      border-collapse: collapse;
-      border: 1px solid #ebebeb;
-      margin: 10px auto;
-      text-align: center;
-      width: 100%;
-      max-width: 500px;
-  }
-
-  .highcharts-data-table caption {
-      padding: 1em 0;
-      font-size: 1.2em;
-      color: #555;
-  }
-
-  .highcharts-data-table th {
-      font-weight: 600;
-      padding: 0.5em;
-  }
-
-  .highcharts-data-table td,
-  .highcharts-data-table th,
-  .highcharts-data-table caption {
-      padding: 0.5em;
-  }
-
-  .highcharts-data-table thead tr,
-  .highcharts-data-table tr:nth-child(even) {
-      background: #f8f8f8;
-  }
-
-  .highcharts-data-table tr:hover {
-      background: #f1f7ff;
-  }
+#container4 {
+  width: 500px;
+  border: 1px solid rgb(46, 70, 88);
+  border-radius: 10px 10px 10px 10px;
+  float: right;
 }

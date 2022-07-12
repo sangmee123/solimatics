@@ -14,17 +14,17 @@
         <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
         <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
         <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=40192e95ade6eb95ad0da497e6f5ebb9"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=18e0427d16bfbd40dc0526789cba7b16"></script>
         <meta name="viewport" content="user-scalable=no, initial-scale=1,maximum-scale=1">
         <link rel="stylesheet" href="index.css"> 
     </head>
 
-    <body onload="init()"> 
-        <div class="board">
+    <body> 
+        <!-- <div class="board">
             <p id="connect">db 연결중...</p>
             <p id="debug">debuging.....</p>
             <p id="result">db Value...</p>
-        </div>  
+        </div>   -->
         <div class="contents">
             <span class="date"></span>
             <div id="menu">
@@ -47,30 +47,44 @@
                     <li class="li13">한내건설(주)</li>
                 </ul>
             </div>
-            
+          
             <!--지도 API-->
             <div id="map"></div>
-            
-            <span class="border">
-                <figure class="highcharts-figure">
-                    <div id="container-speed" class="chart-container"></div>
-                    <div id="container-rpm" class="chart-container"></div>
-                </figure>
-            </span>
-            
+         
+            <figure class="highcharts-figure">
+                <div id="container-speed" class="chart-container"></div>
+                <div id="container-rpm" class="chart-container"></div>
+            </figure>
+
+            <figure class="highcharts-figure3">
+                <div id="container3"></div>
+            </figure>
+
             <figure class="highcharts-figure2">
                 <div id="container2"></div>
+            </figure>   
+            
+            <figure class="highcharts-figure4">
+                <div id="container4"></div>
             </figure>
         </div>    
-
+        <script>
+            // 필요한 변수들을 선언 합니다. 필요한 변수는 여기에 선언해 주세요 !
+            let index = 0;
+            const period = 1000; // 값의 주기 마다 업데이트 합니다. 1000 = 1s(1초)
+            let get_data;
+            // 테스트용 입니다.
+            let arr1 = [1,2,3,4,5];
+            let arr2 = [2,1,4,9,7];
+            let arr3 = [5,2,8,3,5];
+            let arr4 = [4,7,2,4,1]; 
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="index.js"></script>
         <script src="//code.jquery.com/jquery.min.js"></script>
         <script>
-            var index = 0;
-            var timerID;
-            var period = 1000; // 값의 주기 마다 업데이트 합니다. 1000 = 1s(1초)
-            GET_db(); // GET_db 함수를 호출 합니다. 
+            GET_db(); // GET_db 함수를 호출 합니다.
+            Test_fun();
             function GET_db() {
                 $.ajax({
                     url: "GET_db.php",
@@ -78,14 +92,11 @@
                     data: {index: index++ , period: period}
                 }).done(function(data) {// HTTP 요청 성공시 호출 됩니다.
                     data = JSON.parse(data);
+                    get_data = data.mac_id;
                     if(data.tw == "connect"){
                         $('#connect').text("데이터 베이스 연결 성공");
-                        $('#debug').text('현재 카운트 값 : ' + data.index +'업데이트 주기 : '+data.period+' 초 입니다!');/*['uid','mac_id','type_no','get_time','value','time'];*/
+                        $('#debug').text('현재 카운트 값 : ' + data.index +' 업데이트 주기 : '+data.period+' 초 입니다!');/*['uid','mac_id','type_no','get_time','value','time'];*/
                         $('#result').text('DB Data : ' + data.uid + ' , '+ data.mac_id+ ' , '+ data.type_no+ ' , '+ data.get_time+ ' , '+ data.value+ ' , '+ data.time + '입니다!');/*['uid','mac_id','type_no','get_time','value','time'];*/
-                        if(index == 6){
-                            //clearTimeout(timerID);
-                            index = 0;
-                        }
                     }
                 })
                 .fail(function(data) { // HTTP 요청 실패시 호출 됩니다.
@@ -93,10 +104,29 @@
                     $('#debug').text("debuging.....fail");
                     $('#result').text("db Value...fail");
                 })
-                .always(function(data) { // 성공 여부 상관없이 호출 됩니다.
-                    
+                .always(function(data) { // 성공 여부 상관없이 호출 됩니다.  
                 });
-                timerID = setTimeout("GET_db()",period);// 1초 단위로 갱신 처리
+                var timer1 = setTimeout("GET_db()",period);// 1초 단위로 갱신 처리
+            }
+            function Test_fun() { // 테스트를 위한 함수 입니다.  
+                arr1[0]++;
+                arr1[1]++;
+                arr1[2]++;
+                arr1[3]++;
+                arr1[4]++;
+
+                arr2[0]++;
+                arr2[1]++;
+                arr2[2]++;
+                arr2[3]++;
+                arr2[4]++;
+
+                arr3[0]++;
+                arr3[1]++;
+                arr3[2]++;
+                arr3[3]++;
+                arr3[4]++;
+                //var timer2 = setTimeout("Test_fun()", 2000);// 2초 단위로 갱신 처리
             }
         </script>
     </body>
