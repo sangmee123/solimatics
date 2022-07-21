@@ -12,7 +12,6 @@ a {
 
 .title {
   color: white;
-  
   font-size: 40px;
   padding: 200px;
 }
@@ -63,7 +62,8 @@ h1 {
   display: block;
   text-align: center;
   font-size: 30px;
-  color: orangered
+  color: orangered;
+  margin-top: 50px;
 }
 
 /*Map Api Css*/
