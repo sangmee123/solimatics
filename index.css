@@ -71,7 +71,7 @@ h1 {
     display: inline-block;
     width:637px;
     height:530px;
-    margin-left: 20px; 
+    margin-left: 15px; 
     margin-right: 20px;
     top: 154px;
     border-radius: 10px;
@@ -146,7 +146,7 @@ h1 {
     width: 640px;
     height: 350px;
     margin-top: 130px; 
-    margin-left: 25px;
+    margin-left: 20px;
 }
 
 .highcharts-data-table table {
@@ -235,3 +235,54 @@ h1 {
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
+
+/*Graph5*/
+.highcharts-figure5,
+.highcharts-data-table table {
+    min-width: 320px;
+    max-width: 400px;
+    margin-left: 990px;
+}
+
+#container5 {
+    height: 533px;
+    border: 1px solid rgb(46, 70, 88);
+    border-radius: 10px 10px 10px 10px;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
