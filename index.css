@@ -10,6 +10,13 @@ a {
     color: black;
 }
 
+.title {
+  color: white;
+  
+  font-size: 40px;
+  padding: 200px;
+}
+
 .contents {
     position: static;
     margin: 1em auto;
