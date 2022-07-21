@@ -284,10 +284,13 @@ function update_Graph2() {
             backgroundColor: 'rgba(24, 38, 51, 0.4)'
         },
         title: {
-            text: 'Historic World Population by Region'
+            text: '"작업 진도 현황"',
+            style: {
+                color: Highcharts.getOptions().colors[8]
+            }
         },
         subtitle: {
-            text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+            // text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
         },
         xAxis: {
             categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
@@ -355,7 +358,10 @@ function update_Graph3() {
             backgroundColor: 'rgba(24, 38, 51, 0.4)'
         },
         title: {
-            text: 'Temperature vs Rainfall'
+            text: '"천공 누적 작업시간"',
+            style: {
+                color: Highcharts.getOptions().colors[8]
+            }
         },
         xAxis: [{
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
