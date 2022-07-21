@@ -351,7 +351,7 @@ Highcharts.chart('container4', {
             rotation: 'auto'
         },
         title: {
-            text: 'km/h'
+            text: 'bar'
         },
         plotBands: [{
             from: 0,
